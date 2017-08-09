@@ -137,6 +137,8 @@ function dmeng_refresh_all($object=array('rewrite','memcached','transient')){
 
 //~ 每隔一个小时清理一次内容缓存
 add_action( 'wp', 'dmeng_refresh_all_setup_schedule' );
+add_action( 'dmeng_refresh_all_hourly_event', 'dmeng_refresh_all_hourly_event_callback' );
+
 function dmeng_refresh_all_setup_schedule() {
 	if ( ! wp_next_scheduled( 'dmeng_refresh_all_hourly_event' ) ) {
 		wp_schedule_event( time(), 'hourly', 'dmeng_refresh_all_hourly_event');
@@ -147,4 +149,4 @@ function dmeng_refresh_all_hourly_event_callback(){
 	// 清除所有缓存，不仅仅memcached对象缓存
 	dmeng_refresh_all();
 }
-add_action( 'dmeng_refresh_all_hourly_event', 'dmeng_refresh_all_hourly_event_callback' );
+
