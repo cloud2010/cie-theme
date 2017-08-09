@@ -143,6 +143,8 @@ function dmeng_refresh_all_setup_schedule() {
 	}
 }
 function dmeng_refresh_all_hourly_event_callback(){
-	dmeng_refresh_all(array('memcached','transient'));
+	// dmeng_refresh_all(array('memcached','transient'));
+	// 清除所有缓存，不仅仅memcached对象缓存
+	dmeng_refresh_all();
 }
 add_action( 'dmeng_refresh_all_hourly_event', 'dmeng_refresh_all_hourly_event_callback' );
